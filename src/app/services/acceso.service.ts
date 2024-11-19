@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { responseRegister } from '../interfaces/responseRegister';
 import { responseLogin } from '../interfaces/responseLogin';
 import { login } from '../interfaces/login';
+import { responseToken } from '../interfaces/responseToken';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,10 @@ export class AccesoService {
   }
   login(objeto: login): Observable<responseLogin> {
     return this.http.post<responseLogin>(`${this.baseUrl}login`, objeto);
+  }
+  validarToken(token: string): Observable<responseToken> {
+    return this.http.get<responseToken>(
+      `${this.baseUrl}validar-token?token=${token}`
+    );
   }
 }
