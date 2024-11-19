@@ -42,7 +42,7 @@ export class LoginComponent {
       next: (data) => {
         if (data.message === 'Success') {
           localStorage.setItem('access_token', data.access_token);
-          this.router.navigate(['clientes']);
+          this.router.navigate(['inicio']);
         }
       },
       error: (error) => {

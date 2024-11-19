@@ -1,27 +1,28 @@
-import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
-import { ClienteService } from '../../services/cliente.service';
-import { cliente } from '../../interfaces/cliente';
 import { CommonModule } from '@angular/common';
+import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
+import { UnidadService } from '../../services/unidad.service';
+import { unidad } from '../../interfaces/unidad';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { TableComponent } from '../../shared/table/table.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 @Component({
-  selector: 'app-clientes',
+  selector: 'app-unidades',
   standalone: true,
   imports: [CommonModule, SidebarComponent, TableComponent, MatPaginator],
-  templateUrl: './clientes.component.html',
-  styleUrl: './clientes.component.css',
+  templateUrl: './unidades.component.html',
+  styleUrl: './unidades.component.css',
 })
-export class ClientesComponent {
-  private clienteService = inject(ClienteService);
-  public listaCliente: cliente[] = [];
-  public pagedCliente: cliente[] = [];
+export class UnidadesComponent {
+  private unidadService = inject(UnidadService);
+  public listaUnidad: unidad[] = [];
+  public pagedUnidad: unidad[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor() {
-    this.clienteService.lista().subscribe({
+    this.unidadService.lista().subscribe({
       next: (data) => {
         if (data.value.length > 0) {
-          this.listaCliente = data.value;
+          this.listaUnidad = data.value;
           // Inicializamos los datos paginados
           this.setPagedData(0, this.paginator?.pageSize || 10);
         }
@@ -44,6 +45,6 @@ export class ClientesComponent {
   setPagedData(pageIndex: number, pageSize: number) {
     const startIndex = pageIndex * pageSize;
     const endIndex = startIndex + pageSize;
-    this.pagedCliente = this.listaCliente.slice(startIndex, endIndex);
+    this.pagedUnidad = this.listaUnidad.slice(startIndex, endIndex);
   }
 }

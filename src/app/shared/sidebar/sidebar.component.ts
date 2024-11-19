@@ -16,4 +16,13 @@ export class SidebarComponent {
   clientes() {
     this.router.navigate(['clientes']);
   }
+  categorias() {
+    this.router.navigate(['categorias']);
+  }
+  unidades() {
+    this.router.navigate(['unidades']);
+  }
+  productos() {
+    this.router.navigate(['productos']);
+  }
 }

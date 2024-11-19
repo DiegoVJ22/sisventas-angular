@@ -1,27 +1,28 @@
-import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
-import { ClienteService } from '../../services/cliente.service';
-import { cliente } from '../../interfaces/cliente';
 import { CommonModule } from '@angular/common';
+import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
+import { ProductoService } from '../../services/producto.service';
+import { producto } from '../../interfaces/producto';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { TableComponent } from '../../shared/table/table.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 @Component({
-  selector: 'app-clientes',
+  selector: 'app-productos',
   standalone: true,
   imports: [CommonModule, SidebarComponent, TableComponent, MatPaginator],
-  templateUrl: './clientes.component.html',
-  styleUrl: './clientes.component.css',
+  templateUrl: './productos.component.html',
+  styleUrl: './productos.component.css',
 })
-export class ClientesComponent {
-  private clienteService = inject(ClienteService);
-  public listaCliente: cliente[] = [];
-  public pagedCliente: cliente[] = [];
+export class ProductosComponent {
+  private productoService = inject(ProductoService);
+  public listaProducto: producto[] = [];
+  public pagedProducto: producto[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor() {
-    this.clienteService.lista().subscribe({
+    this.productoService.lista().subscribe({
       next: (data) => {
         if (data.value.length > 0) {
-          this.listaCliente = data.value;
+          this.listaProducto = data.value;
           // Inicializamos los datos paginados
           this.setPagedData(0, this.paginator?.pageSize || 10);
         }
@@ -44,6 +45,6 @@ export class ClientesComponent {
   setPagedData(pageIndex: number, pageSize: number) {
     const startIndex = pageIndex * pageSize;
     const endIndex = startIndex + pageSize;
-    this.pagedCliente = this.listaCliente.slice(startIndex, endIndex);
+    this.pagedProducto = this.listaProducto.slice(startIndex, endIndex);
   }
 }

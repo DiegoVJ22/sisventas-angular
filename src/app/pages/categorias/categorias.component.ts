@@ -1,27 +1,28 @@
 import { Component, inject, ViewChild, AfterViewInit } from '@angular/core';
-import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
-import { ClienteService } from '../../services/cliente.service';
-import { cliente } from '../../interfaces/cliente';
+import { CategoriaService } from '../../services/categoria.service';
+import { categoria } from '../../interfaces/categoria';
 import { CommonModule } from '@angular/common';
+import { SidebarComponent } from '../../shared/sidebar/sidebar.component';
 import { TableComponent } from '../../shared/table/table.component';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 @Component({
-  selector: 'app-clientes',
+  selector: 'app-categorias',
   standalone: true,
   imports: [CommonModule, SidebarComponent, TableComponent, MatPaginator],
-  templateUrl: './clientes.component.html',
-  styleUrl: './clientes.component.css',
+  templateUrl: './categorias.component.html',
+  styleUrl: './categorias.component.css',
 })
-export class ClientesComponent {
-  private clienteService = inject(ClienteService);
-  public listaCliente: cliente[] = [];
-  public pagedCliente: cliente[] = [];
+export class CategoriasComponent {
+  private categoriaService = inject(CategoriaService);
+  public listaCategoria: categoria[] = [];
+  public pagedCategoria: categoria[] = [];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   constructor() {
-    this.clienteService.lista().subscribe({
+    this.categoriaService.lista().subscribe({
       next: (data) => {
         if (data.value.length > 0) {
-          this.listaCliente = data.value;
+          this.listaCategoria = data.value;
           // Inicializamos los datos paginados
           this.setPagedData(0, this.paginator?.pageSize || 10);
         }
@@ -44,6 +45,6 @@ export class ClientesComponent {
   setPagedData(pageIndex: number, pageSize: number) {
     const startIndex = pageIndex * pageSize;
     const endIndex = startIndex + pageSize;
-    this.pagedCliente = this.listaCliente.slice(startIndex, endIndex);
+    this.pagedCategoria = this.listaCategoria.slice(startIndex, endIndex);
   }
 }

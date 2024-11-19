@@ -1,28 +1,26 @@
 <app-sidebar>
-  <p class="mb-10 text-2xl font-semibold">LISTA DE CLIENTES</p>
+  <p class="mb-10 text-2xl font-semibold">LISTA DE PRODUCTOS</p>
 
   <app-table>
     <th headers scope="col" class="px-6 py-3">ID</th>
-    <th headers scope="col" class="px-6 py-3">NRO DOC</th>
-    <th headers scope="col" class="px-6 py-3">NOMBRE</th>
-    <th headers scope="col" class="px-6 py-3">EMAIL</th>
-    <th headers scope="col" class="px-6 py-3">DIRECCIÓN</th>
+    <th headers scope="col" class="px-6 py-3">DESCRIPCION</th>
+    <th headers scope="col" class="px-6 py-3">STOCK</th>
+    <th headers scope="col" class="px-6 py-3">PRECIO</th>
     <th headers scope="col" class="px-6 py-3">ACCIONES</th>
     <tr
       rows
-      *ngFor="let cliente of pagedCliente"
+      *ngFor="let producto of pagedProducto"
       class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
     >
       <th
         scope="row"
         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
       >
-        {{ cliente.id }}
+        {{ producto.id }}
       </th>
-      <td class="px-6 py-4">{{ cliente.nro_doc }}</td>
-      <td class="px-6 py-4">{{ cliente.nombre }} {{ cliente.apellido }}</td>
-      <td class="px-6 py-4">{{ cliente.email }}</td>
-      <td class="px-6 py-4">{{ cliente.direccion }}</td>
+      <td class="px-6 py-4">{{ producto.descripcion }}</td>
+      <td class="px-6 py-4">{{ producto.stock }}</td>
+      <td class="px-6 py-4">{{ producto.precio }}</td>
       <td class="px-6 py-4">
         <a
           href="#"
@@ -34,7 +32,7 @@
   </app-table>
 
   <mat-paginator
-    [length]="listaCliente.length"
+    [length]="listaProducto.length"
     [pageSize]="5"
     [pageSizeOptions]="[5, 10, 20]"
     (page)="onPageChange($event)"
